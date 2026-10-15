@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>MY SCHOOL LIFE: PETUALANGAN DI SEKOLAH SD</title>
+    <meta name="description" content="Game simulasi 3D kehidupan sekolah dasar Indonesia terinspirasi Harvest Moon. Jelajahi Sekolah, Belajar, Berteman, dan Raih Prestasi!">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- 3D WebGL Canvas Container -->
+    <div id="canvas-container"></div>
+
+    <!-- Toast Notifications -->
+    <div id="toast-container"></div>
+
+    <!-- Floating Target Prompt Pill -->
+    <div id="target-prompt-pill">
+        <span style="font-size: 1.2rem;">✨</span>
+        <span id="prompt-text">Interaksi [E]</span>
+    </div>
+
+    <!-- ==========================================
+         START SCREEN / CHARACTER CREATION
+         ========================================== -->
+    <div id="start-screen">
+        <div class="title-badge">SDN KUNINGAN 03</div>
+        <h1 class="game-title">MY SCHOOL LIFE</h1>
+        <div class="game-tagline">“Jelajahi Sekolah, Belajar, Berteman, dan Raih Prestasi!”</div>
+
+        <div class="start-card">
+            <div class="input-group">
+                <label class="input-label">PILIH KARAKTER SISWA</label>
+                <div class="char-select-group">
+                    <button id="btn-char-boy" class="char-card-btn active" type="button">
+                        <img src="assets/char_boy.svg" class="char-img-preview" alt="Siswa Putra">
+                        <span class="char-name">Siswa Putra</span>
+                    </button>
+                    <button id="btn-char-girl" class="char-card-btn" type="button">
+                        <img src="assets/char_girl.svg" class="char-img-preview" alt="Siswi Putri">
+                        <span class="char-name">Siswi Putri</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label class="input-label" for="input-char-name">NAMA KARAKTER</label>
+                <input id="input-char-name" class="input-box" type="text" value="Budi" maxlength="16" placeholder="Masukkan nama...">
+            </div>
+
+            <button id="btn-start-game" class="btn-primary-action" type="button">
+                <span>🎒</span> Mulai Petualangan Sekolah
+            </button>
+
+            <button id="btn-continue-game" class="btn-secondary-action" type="button" style="display: none;">
+                <span>💾</span> Lanjutkan Permainan Terakhir
+            </button>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         IN-GAME HUD OVERLAY
+         ========================================== -->
+    <div id="hud-container">
+        <!-- TOP HUD BAR -->
+        <div class="hud-top-bar">
+            <!-- Left: Player Profile & Stats -->
+            <div class="hud-left-card">
+                <div id="hud-player-avatar" class="player-avatar-circle">
+                    <img id="hud-player-avatar-img" src="assets/char_boy.svg" alt="Avatar Siswa">
+                </div>
+                <div class="player-meta">
+                    <div class="player-name-row">
+                        <span id="hud-player-name" class="player-name-txt">Budi</span>
+                        <span class="player-grade-badge">Kelas 4</span>
+                    </div>
+                    <div class="stat-bars-container">
+                        <div class="stat-bar-item">
+                            <span>⚡</span>
+                            <div class="bar-track">
+                                <div id="fill-energy" class="bar-fill fill-energy" style="width: 100%;"></div>
+                            </div>
+                        </div>
+                        <div class="stat-bar-item">
+                            <span>😊</span>
+                            <div class="bar-track">
+                                <div id="fill-happy" class="bar-fill fill-happy" style="width: 100%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Center: School Clock & Day Period -->
+            <div class="hud-center-pill">
+                <div id="hud-time" class="clock-display">06:30 WIB</div>
+                <div id="hud-period" class="day-period-tag">Senin • Kedatangan Siswa</div>
+                <div id="hud-mp-status" class="hud-mp-pill offline" title="Status Mabar Multiplayer">
+                    <span>🟡</span> <span>Mode Solo</span>
+                </div>
+            </div>
+
+            <!-- Right: School Coins & Menu Buttons -->
+            <div class="hud-right-group">
+                <div class="coin-badge">
+                    <span>🪙</span>
+                    <span id="hud-coins">50</span>
+                </div>
+                <button id="btn-hud-chat" class="icon-btn" title="Kirim Chat / Sapa Teman" type="button">💬</button>
+                <button id="btn-hud-quests" class="icon-btn" title="Misi Harian" type="button">📜</button>
+                <button id="btn-hud-inventory" class="icon-btn" title="Tas Inventaris" type="button">🎒</button>
+                <button id="btn-hud-map" class="icon-btn" title="Peta Sekolah" type="button">🗺️</button>
+                <button id="btn-hud-audio" class="icon-btn" title="Suara / Musik" type="button">🔊</button>
+                <button id="btn-hud-pause" class="icon-btn" title="Pengaturan" type="button">⚙️</button>
+            </div>
+        </div>
+
+        <!-- Live Chat Messages Feed -->
+        <div id="chat-messages-feed"></div>
+
+        <!-- Quest Shortcut Pill Banner -->
+        <div id="hud-quest-shortcut" class="quest-banner" onclick="game.openQuestsModal()">
+            <span class="quest-banner-icon">⭐</span>
+            <span id="quest-banner-text">Misi: Sapa Pak Asep di Pos Satpam</span>
+        </div>
+
+        <!-- BOTTOM HUD BAR: Mobile Touch Controls -->
+        <div class="hud-bottom-bar">
+            <!-- Left: Virtual Joystick for touch movement -->
+            <div id="joystick-zone">
+                <div class="joystick-base">
+                    <div id="joystick-stick" class="joystick-stick"></div>
+                </div>
+            </div>
+
+            <!-- Right: Action Buttons -->
+            <div class="action-buttons-cluster">
+                <div class="action-btn-row">
+                    <button id="btn-action-jump" class="action-btn" type="button">
+                        <span>⬆️</span>
+                        <span class="btn-sublabel">Lompat</span>
+                    </button>
+                    <button id="btn-action-run" class="action-btn btn-run" type="button">
+                        <span>👟</span>
+                        <span class="btn-sublabel">Lari</span>
+                    </button>
+                </div>
+                <button id="btn-action-interact" class="action-btn btn-interact" type="button">
+                    <span>💬</span>
+                    <span class="btn-sublabel">Interaksi</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         MODAL 1: NPC DIALOGUE & FRIENDSHIP
+         ========================================== -->
+    <div id="dialogue-modal" class="modal-overlay">
+        <div class="modal-content-box">
+            <div class="modal-header">
+                <div class="modal-header-title">
+                    <span>💬</span> Percakapan
+                </div>
+                <button class="modal-close-btn" type="button">✕</button>
+            </div>
+            <div class="modal-body">
+                <div class="dialogue-speaker-card">
+                    <div id="dialogue-avatar" class="speaker-avatar">
+                        <img id="dialogue-avatar-img" src="assets/npc_satpam.svg" alt="Speaker Avatar">
+                    </div>
+                    <div class="speaker-info">
+                        <div id="dialogue-speaker-name" class="speaker-name">Pak Asep</div>
+                        <div id="dialogue-speaker-role" class="speaker-role">Penjaga Gerbang</div>
+                        <div id="dialogue-hearts" class="friendship-hearts">❤️❤️❤️🤍🤍</div>
+                    </div>
+                </div>
+                <div id="dialogue-content-text" class="dialogue-text-bubble">
+                    "Selamat datang di SDN KUNINGAN 03, anak pintar!"
+                </div>
+                <div class="dialogue-actions">
+                    <button class="btn-primary-action" style="font-size:0.95rem; padding:10px 20px;" onclick="game.closeAllModals()" type="button">
+                        Baik, Terima Kasih!
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         MODAL 2: CLASSROOM QUIZ
+         ========================================== -->
+    <div id="quiz-modal" class="modal-overlay">
+        <div class="modal-content-box">
+            <div class="modal-header">
+                <div id="quiz-title" class="modal-header-title">
+                    <span>📝</span> Kuis Papan Tulis Kelas
+                </div>
+                <button class="modal-close-btn" type="button">✕</button>
+            </div>
+            <div class="modal-body">
+                <div id="quiz-question" class="quiz-question-box">
+                    Soal matematika atau pengetahuan umum...
+                </div>
+                <div id="quiz-options" class="quiz-options-list">
+                    <!-- Options populated dynamically -->
+                </div>
+                <div id="quiz-feedback" class="quiz-feedback-box"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         MODAL 3: CANTEEN & SHOP
+         ========================================== -->
+    <div id="canteen-modal" class="modal-overlay">
+        <div class="modal-content-box">
+            <div class="modal-header">
+                <div class="modal-header-title">
+                    <span>🍲</span> Kantin Mbok Darmi
+                </div>
+                <button class="modal-close-btn" type="button">✕</button>
+            </div>
+            <div class="modal-body">
+                <div style="font-weight: 800; font-size: 1rem; color: #1E293B;">Menu Jajanan & Benih Kebun:</div>
+                <div id="canteen-items-grid" class="items-grid"></div>
+
+                <div style="font-weight: 800; font-size: 1rem; color: #1E293B; margin-top: 14px;">Jual Hasil Panen Sayuran:</div>
+                <div id="canteen-sell-grid" class="items-grid"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         MODAL 4: GARDEN PLOT CARE (HARVEST MOON)
+         ========================================== -->
+    <div id="garden-modal" class="modal-overlay">
+        <div class="modal-content-box">
+            <div class="modal-header">
+                <div id="garden-plot-title" class="modal-header-title">
+                    <span>🌱</span> Petak Kebun Sekolah
+                </div>
+                <button class="modal-close-btn" type="button">✕</button>
+            </div>
+            <div class="modal-body">
+                <div id="garden-plot-status" style="font-size: 1rem; line-height: 1.5; color: #1E293B;">
+                    Status Petak: Menunggu tindakan...
+                </div>
+                <div id="garden-actions" style="display: flex; flex-direction: column; gap: 10px; margin-top: 10px;">
+                    <!-- Action buttons populated dynamically -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         MODAL 5: INVENTORY / TAS RANSEL
+         ========================================== -->
+    <div id="inventory-modal" class="modal-overlay">
+        <div class="modal-content-box">
+            <div class="modal-header">
+                <div class="modal-header-title">
+                    <span>🎒</span> Tas Ransel Sekolah
+                </div>
+                <button class="modal-close-btn" type="button">✕</button>
+            </div>
+            <div class="modal-tabs">
+                <button class="modal-tab-btn active" onclick="game.renderInventory('all')">Semua</button>
+                <button class="modal-tab-btn" onclick="game.renderInventory('food')">Makanan</button>
+                <button class="modal-tab-btn" onclick="game.renderInventory('seed')">Benih</button>
+                <button class="modal-tab-btn" onclick="game.renderInventory('crop')">Hasil Panen</button>
+            </div>
+            <div class="modal-body">
+                <div id="inventory-items-grid" class="items-grid"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         MODAL 6: PERPUSTAKAAN (LIBRARY STORIES)
+         ========================================== -->
+    <div id="library-modal" class="modal-overlay">
+        <div class="modal-content-box">
+            <div class="modal-header">
+                <div class="modal-header-title">
+                    <span>📚</span> Pojok Baca Perpustakaan
+                </div>
+                <button class="modal-close-btn" type="button">✕</button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <h3 id="lib-book-title" style="font-size:1.15rem; color:#1E293B;">Judul Buku</h3>
+                    <div id="lib-book-category" style="font-size:0.8rem; color:#64748B; font-weight:700;">Kategori</div>
+                </div>
+                <div id="lib-book-text" class="dialogue-text-bubble" style="background:#F8FAFC; font-size:0.95rem;">
+                    Cerita buku...
+                </div>
+                <div id="lib-quiz-container"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         MODAL 7: LAB KOMPUTER TYPING CHALLENGE
+         ========================================== -->
+    <div id="computer-modal" class="modal-overlay">
+        <div class="modal-content-box">
+            <div class="modal-header">
+                <div class="modal-header-title">
+                    <span>💻</span> Laboratorium Komputer
+                </div>
+                <button class="modal-close-btn" type="button">✕</button>
+            </div>
+            <div class="modal-body">
+                <div style="background:#1E293B; color:#00E5FF; padding:16px; border-radius:14px; text-align:center;">
+                    <div style="font-size:0.85rem; color:#94A3B8;">KETIK KATA BERIKUT DENGAN BENAR:</div>
+                    <div id="comp-target-word" style="font-size:1.8rem; font-weight:900; letter-spacing:3px; margin:8px 0;">KOMPUTER</div>
+                    <div id="comp-target-hint" style="font-size:0.85rem; color:#E2E8F0;">Petunjuk</div>
+                </div>
+
+                <div class="input-group">
+                    <input id="comp-typing-input" class="input-box" type="text" placeholder="Ketik kata di sini..." autocomplete="off">
+                </div>
+
+                <button class="btn-primary-action" onclick="game.submitComputerTyping()" type="button">
+                    Kirim Jawaban Mengetik
+                </button>
+                <div id="comp-feedback" class="quiz-feedback-box"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         MODAL 8: MISI HARIAN (DAILY QUESTS)
+         ========================================== -->
+    <div id="quests-modal" class="modal-overlay">
+        <div class="modal-content-box">
+            <div class="modal-header">
+                <div class="modal-header-title">
+                    <span>📜</span> Agenda Misi Harian
+                </div>
+                <button class="modal-close-btn" type="button">✕</button>
+            </div>
+            <div class="modal-body" id="quests-list-container">
+                <!-- Quests list dynamically generated -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         MODAL 9: DENAH & PETA SEKOLAH
+         ========================================== -->
+    <div id="map-modal" class="modal-overlay">
+        <div class="modal-content-box">
+            <div class="modal-header">
+                <div class="modal-header-title">
+                    <span>🗺️</span> Denah Kompleks SDN KUNINGAN 03
+                </div>
+                <button class="modal-close-btn" type="button">✕</button>
+            </div>
+            <div class="modal-body">
+                <div id="map-svg-container"></div>
+                <div style="font-size:0.8rem; color:#64748B; text-align:center;">
+                    Tanda 📍 menunjukkan posisi karaktermu saat ini.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         MODAL 10: PENGATURAN & JEDA
+         ========================================== -->
+    <div id="settings-modal" class="modal-overlay">
+        <div class="modal-content-box">
+            <div class="modal-header">
+                <div class="modal-header-title">
+                    <span>⚙️</span> Pengaturan & Bantuan
+                </div>
+                <button class="modal-close-btn" type="button">✕</button>
+            </div>
+            <div class="modal-body">
+                <div style="background:#F1F5F9; padding:14px; border-radius:14px; font-size:0.9rem; line-height:1.6;">
+                    <b>Petunjuk Kontrol PC:</b><br>
+                    • Gerak: WASD atau Panah<br>
+                    • Interaksi / Bicara: E atau Tombol Layar<br>
+                    • Berlari: Shift<br>
+                    • Melompat: Spasi<br>
+                    • Tas: I | Peta: M | Tutup Menu: Esc<br>
+                    <br>
+                    <b>Petunjuk Kontrol Mobile / Android:</b><br>
+                    • Gunakan Joystick sentuh di kiri bawah untuk berjalan<br>
+                    • Tekan tombol Interaksi, Lari, dan Lompat di kanan bawah
+                </div>
+
+                <button class="btn-primary-action" onclick="game.saveGame(true)" type="button">
+                    <span>💾</span> Simpan Progres (Save)
+                </button>
+                <button class="btn-secondary-action" onclick="game.resetGame()" style="color:#C62828;" type="button">
+                    <span>🔄</span> Mulai Ulang Dari Awal (Reset)
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         MODAL 11: CHAT & SAPAAN MULTIPLAYER
+         ========================================== -->
+    <div id="chat-modal" class="modal-overlay">
+        <div class="modal-content-box" style="max-width: 440px;">
+            <div class="modal-header">
+                <div class="modal-header-title">
+                    <span>💬</span> Obrolan & Sapaan Siswa
+                </div>
+                <button class="modal-close-btn" type="button">✕</button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group">
+                    <input id="chat-input-text" class="input-box" type="text" placeholder="Ketik pesan untuk semua pemain..." maxlength="60">
+                </div>
+                <button id="btn-send-chat" class="btn-primary-action" type="button">
+                    Kirim Pesan
+                </button>
+
+                <div style="font-weight: 800; font-size: 0.85rem; color: #64748B; margin-top: 6px;">Sapaan Cepat (Quick Emote):</div>
+                <div class="quick-emotes-row">
+                    <button class="btn-quick-emote" data-text="Halo kawan! 👋" type="button">Halo kawan! 👋</button>
+                    <button class="btn-quick-emote" data-text="Ayo main bola di lapangan! ⚽" type="button">Main bola! ⚽</button>
+                    <button class="btn-quick-emote" data-text="Jajan ke kantin yuk! 🍌" type="button">Ke kantin yuk! 🍌</button>
+                    <button class="btn-quick-emote" data-text="Ayo siram kebun sekolah! 🌱" type="button">Siram kebun! 🌱</button>
+                    <button class="btn-quick-emote" data-text="Belajar di kelas bareng yuk! 📚" type="button">Belajar bareng! 📚</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Core Scripts -->
+    <script src="libs/three.min.js"></script>
+    <script src="js/audio.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/world.js"></script>
+    <script src="js/player.js"></script>
+    <script src="js/npc.js"></script>
+    <script src="js/garden.js"></script>
+    <script src="js/multiplayer.js"></script>
+    <script src="js/game.js"></script>
+</body>
+</html>

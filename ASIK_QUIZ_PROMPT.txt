@@ -1,0 +1,488 @@
+<USER_REQUEST>
+# PROMPT MASTER PEMBUATAN GAME EDUKASI ASIK-QUIZ
+
+## 1. PERAN AI
+
+Bertindaklah sebagai senior game developer, UI/UX designer, web programmer, game designer, dan ahli teknologi pendidikan sekolah dasar.
+
+Buat aplikasi game edukasi berbasis web bernama **ASIK-QUIZ** yang menggabungkan kuis interaktif, petualangan pixel art, avatar siswa, eksplorasi lingkungan sekolah, misi belajar, dan sistem penghargaan.
+
+Game ini terinspirasi oleh konsep gamifikasi platform kuis edukasi seperti ZEP QUIZ, tetapi harus memiliki identitas visual, desain, karakter, peta, dan mekanisme permainan sendiri.
+
+Aplikasi harus benar-benar berfungsi, dapat dimainkan, responsif, dan bukan sekadar mockup.
+
+## 2. IDENTITAS GAME
+
+Nama: ASIK-QUIZ
+
+Slogan: “Petualangan Seru, Belajar Jadi Asyik!”
+
+Deskripsi:
+ASIK-QUIZ adalah game edukasi interaktif untuk siswa SD kelas 1–6 yang memungkinkan siswa mempelajari berbagai mata pelajaran melalui petualangan, eksplorasi lokasi, penyelesaian misi, kuis, dan tantangan edukatif.
+
+Target pengguna:
+- Siswa SD kelas 1–6.
+- Guru sekolah dasar.
+- Orang tua yang mendampingi anak belajar.
+
+Prinsip utama:
+- Menyenangkan.
+- Edukatif.
+- Ramah anak.
+- Mudah digunakan.
+- Mendukung berbagai mata pelajaran.
+- Bisa dimainkan pada komputer, laptop, tablet, dan smartphone Android.
+
+## 3. DESAIN VISUAL
+
+Gunakan gaya pixel art 2D dengan suasana game petualangan yang ceria.
+
+Elemen visual:
+- Bangunan sekolah.
+- Karakter siswa dengan avatar.
+- Pepohonan dan taman.
+- Jalan setapak.
+- Lapangan bermain.
+- Perpustakaan.
+- Laboratorium.
+- Kantin.
+- Ruang kelas.
+- Papan petunjuk.
+- Koin, bintang, lencana, dan ikon misi.
+
+Gunakan kombinasi warna hijau, biru, kuning, oranye, dan krem dengan kontras yang baik.
+
+Buat antarmuka modern, bersih, konsisten, dan mudah dipahami anak SD.
+
+Gunakan font yang jelas, tombol besar, animasi ringan, dan ikon yang mudah dikenali.
+
+Seluruh aset visual harus orisinal atau dibuat menggunakan bentuk CSS, Canvas, SVG, dan elemen grafis yang tersedia. Jangan menyalin aset berhak cipta dari game lain.
+
+## 4. HALAMAN PEMBUKA
+
+Buat halaman utama yang menampilkan:
+- Logo ASIK-QUIZ.
+- Slogan game.
+- Ilustrasi sekolah pixel art.
+- Tombol MULAI BERMAIN.
+- Tombol PILIH AVATAR.
+- Tombol PETUNJUK BERMAIN.
+- Tombol MODE GURU.
+- Informasi progres pemain jika tersedia.
+
+Ketika tombol MULAI BERMAIN ditekan, arahkan pengguna ke pemilihan kelas dan dunia permainan.
+
+Setiap tombol harus menjalankan fungsi yang nyata.
+
+## 5. PEMILIHAN AVATAR
+
+Sediakan berbagai karakter siswa laki-laki dan perempuan dengan pakaian yang sopan dan beragam.
+
+Fitur:
+- Memilih karakter.
+- Memilih variasi warna pakaian.
+- Mengisi nama panggilan.
+- Melihat pratinjau avatar.
+- Menyimpan avatar terpilih.
+- Menampilkan avatar pada peta permainan.
+
+Hindari meminta data pribadi sensitif dari anak.
+
+## 6. PEMILIHAN KELAS
+
+Sediakan pilihan:
+- Kelas 1 SD.
+- Kelas 2 SD.
+- Kelas 3 SD.
+- Kelas 4 SD.
+- Kelas 5 SD.
+- Kelas 6 SD.
+
+Setiap kelas memiliki materi dan tingkat kesulitan yang sesuai dengan usia siswa.
+
+Saat siswa memilih kelas, tampilkan daftar mata pelajaran yang tersedia.
+
+Pilihan kelas harus dapat diubah kapan saja melalui menu pengaturan atau pemilihan kelas.
+
+## 7. PETA DUNIA ASIK-QUIZ
+
+Buat peta sekolah interaktif bergaya pixel art.
+
+Lokasi yang tersedia:
+
+1. GERBANG SEKOLAH — pintu masuk dunia ASIK-QUIZ.
+2. KELAS PINTAR — tantangan Bahasa Indonesia dan Bahasa Inggris.
+3. LABORATORIUM SAINS — tantangan IPAS dan eksperimen pengetahuan.
+4. RUANG MATEMATIKA — tantangan berhitung dan logika.
+5. PERPUSTAKAAN ILMU — literasi, membaca, dan pengetahuan umum.
+6. LABORATORIUM KOMPUTER — informatika dan teknologi digital.
+7. TAMAN KREATIVITAS — seni budaya dan prakarya.
+8. LAPANGAN OLAHRAGA — pendidikan jasmani dan kesehatan.
+9. MUSHOLA KARAKTER — Pendidikan Agama Islam dan Budi Pekerti.
+10. RUANG PPKn — Pancasila, kewarganegaraan, dan kehidupan bermasyarakat.
+11. KANTIN SEHAT — tantangan gizi dan kebiasaan hidup sehat.
+12. KASTEL TANTANGAN — ujian akhir gabungan berbagai mata pelajaran.
+
+Setiap lokasi mempunyai ikon, nama, deskripsi, daftar misi, tingkat kesulitan, dan progres penyelesaian.
+
+Ketika pemain memilih lokasi, tampilkan panel informasi dan tombol MASUK.
+
+Lokasi dapat dibuka berdasarkan progres atau langsung tersedia jika diatur oleh guru.
+
+Sediakan tombol KEMBALI KE PETA.
+
+Peta harus dapat digunakan melalui klik atau sentuhan. Jika avatar mendukung pergerakan bebas, tambahkan kontrol keyboard dan tombol virtual pada layar sentuh.
+
+## 8. MATA PELAJARAN
+
+Game wajib mendukung seluruh mata pelajaran umum SD, termasuk:
+
+A. Pendidikan Agama Islam dan Budi Pekerti (PAI).
+B. Pendidikan Pancasila.
+C. Bahasa Indonesia.
+D. Matematika.
+E. IPAS.
+F. Bahasa Inggris.
+G. Seni Budaya dan Prakarya.
+H. Pendidikan Jasmani, Olahraga, dan Kesehatan (PJOK).
+I. Informatika atau literasi digital sesuai jenjang dan kebutuhan sekolah.
+J. Muatan lokal sesuai pengaturan guru.
+
+Materi harus disesuaikan dengan kelas, kurikulum yang digunakan, dan tujuan pembelajaran.
+
+Jangan mengasumsikan bahwa semua sekolah menggunakan struktur mata pelajaran atau muatan lokal yang sama.
+
+Guru harus dapat mengubah daftar mata pelajaran dan materi sesuai kebutuhan.
+
+## 9. SISTEM KUIS
+
+Sediakan jenis permainan berikut:
+
+1. Pilihan ganda.
+2. Benar atau salah.
+3. Isian singkat.
+4. Mencocokkan pasangan.
+5. Mengurutkan langkah atau kejadian.
+6. Mengelompokkan kategori.
+7. Menjawab berdasarkan gambar.
+8. Menjawab berdasarkan cerita.
+9. Teka-teki logika.
+10. Tantangan campuran.
+
+Setiap soal memiliki:
+- Pertanyaan.
+- Pilihan jawaban jika diperlukan.
+- Kunci jawaban.
+- Pembahasan.
+- Tingkat kesulitan.
+- Nomor soal.
+- Indikator progres.
+- Pengaturan waktu opsional.
+
+Ketika siswa menjawab, periksa jawaban secara otomatis.
+
+Jika benar:
+- Tampilkan animasi positif.
+- Berikan poin.
+- Tampilkan penjelasan.
+- Perbarui progres.
+
+Jika salah:
+- Tampilkan pesan yang ramah.
+- Berikan petunjuk atau pembahasan.
+- Jangan mempermalukan siswa.
+- Jangan mengurangi nilai secara berlebihan.
+
+## 10. BANK SOAL MULTIMATA PELAJARAN
+
+Buat bank soal terstruktur dengan data:
+- Kelas.
+- Mata pelajaran.
+- Topik.
+- Jenis soal.
+- Pertanyaan.
+- Pilihan jawaban.
+- Jawaban benar.
+- Pembahasan.
+- Tingkat kesulitan.
+- Gambar jika diperlukan.
+
+Guru harus bisa menambah, mengubah, dan menghapus soal.
+
+Sediakan minimal 5 contoh soal yang dapat dimainkan untuk setiap mata pelajaran yang diaktifkan pada versi awal.
+
+Gunakan contoh soal yang benar secara akademik, sesuai usia siswa, dan ditulis dalam bahasa Indonesia yang baik.
+
+Untuk jawaban matematika, periksa hasil secara akurat. Untuk pertanyaan terbuka, gunakan mekanisme penilaian yang sesuai dan jangan mengklaim penilaian otomatis sempurna.
+
+Jika menggunakan gambar, gunakan ilustrasi yang sesuai dengan pertanyaan.
+
+## 11. CONTOH KONTEN SIAP DIMAINKAN
+
+Buat contoh soal awal untuk beberapa mata pelajaran.
+
+MATEMATIKA — KELAS 3:
+Pertanyaan: Berapakah hasil dari 125 + 75?
+A. 150
+B. 200
+C. 225
+D. 250
+
+Jawaban benar: B. 200.
+
+BAHASA INDONESIA — KELAS 3:
+Pertanyaan: Apa gagasan utama sebuah paragraf?
+A. Ide pokok yang dibahas dalam paragraf.
+B. Kata terakhir dalam paragraf.
+C. Nama penulis paragraf.
+D. Jumlah kalimat dalam paragraf.
+
+Jawaban benar: A.
+
+IPAS — KELAS 4:
+Pertanyaan: Bagian tumbuhan yang umumnya menyerap air dan mineral dari tanah adalah...
+A. Daun.
+B. Bunga.
+C. Akar.
+D. Buah.
+
+Jawaban benar: C. Akar.
+
+PENDIDIKAN PANCASILA — KELAS 3:
+Pertanyaan: Ketika berdiskusi dalam kelompok, sikap yang baik adalah...
+A. Memaksakan pendapat.
+B. Menghargai pendapat teman.
+C. Tidak mau mendengarkan.
+D. Meninggalkan kelompok.
+
+Jawaban benar: B.
+
+BAHASA INGGRIS — KELAS 3:
+Pertanyaan: What is the English word for “buku”?
+A. Table.
+B. Book.
+C. Chair.
+D. Door.
+
+Jawaban benar: B. Book.
+
+PAI — KELAS 3:
+Pertanyaan: Sikap berprasangka baik kepada teman disebut...
+A. Husnuzan.
+B. Suuzan.
+C. Sombong.
+D. Iri hati.
+
+Jawaban benar: A. Husnuzan.
+
+Berikan pembahasan sederhana untuk setiap jawaban. Contoh soal ini merupakan konten awal dan harus dapat diedit guru.
+
+## 12. SISTEM POIN DAN PENGHARGAAN
+
+Terapkan:
+- Poin untuk jawaban benar.
+- Bonus untuk penyelesaian misi.
+- Bintang untuk pencapaian target.
+- Lencana untuk prestasi tertentu.
+- Level pemain.
+- Progres setiap mata pelajaran.
+- Ringkasan hasil setelah kuis.
+
+Contoh lencana:
+- Jago Matematika.
+- Sahabat Literasi.
+- Penjelajah Sains.
+- Bintang Pancasila.
+- Kreator Cilik.
+- Juara Bahasa.
+- Bintang Akhlak.
+- Penjelajah Semua Pelajaran.
+
+Sediakan penghargaan berdasarkan proses belajar, ketekunan, dan penyelesaian misi, bukan hanya kecepatan.
+
+Hindari kompetisi yang mempermalukan siswa dengan kemampuan belajar yang berbeda.
+
+## 13. MODE GURU
+
+Buat dasbor khusus guru yang menyediakan fitur:
+
+- Memilih kelas.
+- Mengaktifkan mata pelajaran.
+- Membuat topik atau misi.
+- Menambah soal.
+- Mengedit soal.
+- Menghapus soal.
+- Menentukan kunci jawaban.
+- Menambahkan pembahasan.
+- Mengatur tingkat kesulitan.
+- Mengatur jumlah soal.
+- Mengatur durasi kuis.
+- Mengatur poin.
+- Memilih mode latihan atau tantangan.
+- Melihat hasil belajar.
+- Melihat progres penyelesaian.
+- Mengunduh atau mengekspor bank soal.
+
+Sediakan impor dan ekspor data soal dalam format JSON.
+
+Jika memungkinkan, sediakan ekspor hasil belajar ke CSV.
+
+Mode guru harus memiliki pemisahan yang jelas dari mode siswa. Jangan menganggap nama tombol atau halaman tersembunyi sebagai sistem autentikasi yang aman.
+
+Jika belum tersedia backend, gunakan penyimpanan lokal dan jelaskan bahwa data hanya tersimpan pada browser atau perangkat tersebut.
+
+Jangan mengklaim data siswa dapat tersinkronisasi antargawai jika belum ada backend yang mendukungnya.
+
+## 14. MODE PERMAINAN
+
+Sediakan beberapa mode:
+
+MODE PETUALANGAN:
+Siswa menjelajahi peta dan membuka misi secara bertahap.
+
+MODE LATIHAN:
+Siswa memilih mata pelajaran dan berlatih soal tanpa tekanan waktu.
+
+MODE TANTANGAN:
+Siswa menyelesaikan sejumlah soal dengan target nilai tertentu.
+
+MODE CAMPURAN:
+Siswa menjawab soal dari beberapa mata pelajaran.
+
+MODE GURU:
+Guru membuat dan mengelola kuis sesuai tujuan pembelajaran.
+
+Pastikan setiap mode benar-benar dapat dibuka dan dimainkan.
+
+## 15. KONTROL DAN DUKUNGAN ANDROID
+
+Aplikasi harus responsif untuk:
+- Android.
+- Tablet.
+- Laptop.
+- Komputer desktop.
+
+Untuk Android:
+- Gunakan tombol sentuh berukuran besar.
+- Pastikan tombol tidak saling bertumpuk.
+- Jangan bergantung pada hover.
+- Sesuaikan ukuran teks dengan layar.
+- Gunakan panel yang dapat digulir jika diperlukan.
+- Sediakan tombol kembali yang jelas.
+- Gunakan tombol virtual untuk menggerakkan avatar jika dibutuhkan.
+- Pastikan kuis nyaman digunakan dalam orientasi potret maupun lanskap.
+
+Untuk desktop:
+- Gunakan mouse dan keyboard.
+- Sediakan kontrol gerak alternatif jika avatar berjalan.
+- Pastikan tampilan tidak terlalu melebar sehingga sulit dibaca.
+
+## 16. PENYIMPANAN DAN PROGRES
+
+Gunakan LocalStorage untuk menyimpan:
+- Nama panggilan pemain.
+- Avatar yang dipilih.
+- Kelas aktif.
+- Poin dan bintang.
+- Lencana.
+- Progres level.
+- Pengaturan permainan.
+- Bank soal buatan guru jika sesuai.
+
+Tambahkan fitur mulai ulang progres dengan konfirmasi agar data tidak terhapus secara tidak sengaja.
+
+Jangan menyimpan informasi pribadi sensitif anak.
+
+Berikan pesan yang jelas apabila penyimpanan lokal tidak tersedia atau data tidak dapat disimpan.
+
+## 17. TEKNOLOGI PENGEMBANGAN
+
+Gunakan:
+- HTML5.
+- CSS3.
+- JavaScript.
+- Canvas, SVG, atau elemen HTML untuk visual permainan.
+- LocalStorage untuk penyimpanan lokal.
+- Struktur data soal yang terpisah dari kode antarmuka.
+
+Utamakan aplikasi web yang dapat dijalankan langsung dalam lingkungan Gemini Canvas.
+
+Hindari dependensi eksternal yang tidak diperlukan.
+
+Pisahkan kode untuk:
+- Navigasi halaman.
+- Peta permainan.
+- Avatar.
+- Bank soal.
+- Sistem kuis.
+- Sistem skor.
+- Penyimpanan progres.
+- Mode guru.
+
+## 18. STRUKTUR HALAMAN
+
+Buat halaman:
+1. Halaman pembuka.
+2. Pemilihan avatar.
+3. Pemilihan kelas.
+4. Peta dunia.
+5. Pemilihan mata pelajaran.
+6. Detail lokasi.
+7. Halaman materi.
+8. Halaman kuis.
+9. Umpan balik jawaban.
+10. Hasil kuis.
+11. Progres pemain.
+12. Koleksi lencana.
+13. Pengaturan.
+14. Mode guru.
+15. Pengelolaan bank soal.
+16. Halaman laporan hasil belajar.
+
+Semua navigasi harus berfungsi dan pengguna dapat kembali ke halaman sebelumnya.
+
+## 19. STANDAR KUALITAS
+
+Sebelum menyelesaikan aplikasi, periksa:
+- Tidak ada tombol yang tidak berfungsi.
+- Tidak ada halaman kosong.
+- Soal dan kunci jawaban sesuai.
+- Perhitungan skor benar.
+- Progres dapat disimpan.
+- Navigasi dapat digunakan berulang kali.
+- Aplikasi responsif.
+- Tidak ada kesalahan JavaScript yang menghambat permainan.
+- Soal sesuai jenjang kelas.
+- Konten dapat diedit guru.
+- Pengguna dapat menyelesaikan permainan sampai halaman hasil.
+
+Jangan membuat semua fitur sebagai tampilan palsu. Implementasikan fungsi inti terlebih dahulu.
+
+## 20. PRIORITAS PEMBUATAN
+
+Bangun versi pertama yang benar-benar berfungsi dengan prioritas:
+
+1. Halaman pembuka ASIK-QUIZ.
+2. Pemilihan avatar dan kelas.
+3. Peta sekolah pixel art.
+4. Pemilihan mata pelajaran.
+5. Minimal lima soal untuk setiap mata pelajaran yang diaktifkan.
+6. Sistem kuis dan umpan balik.
+7. Perhitungan skor dan bintang.
+8. Halaman hasil akhir.
+9. Penyimpanan progres.
+10. Dasbor dasar mode guru.
+
+Setelah fungsi inti berjalan dengan baik, lanjutkan dengan peta yang lebih luas, animasi, lencana, mode permainan tambahan, dan pengelolaan bank soal.
+
+HASIL AKHIR:
+Buat ASIK-QUIZ sebagai game edukasi yang menarik, interaktif, mudah dikembangkan, dan dapat digunakan guru untuk berbagai mata pelajaran SD kelas 1–6.
+
+Mulailah membuat aplikasinya sekarang. Jangan hanya memberikan penjelasan, rancangan, atau contoh kode. Bangun aplikasi yang dapat langsung dicoba di lingkungan yang tersedia.
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-10-14T01:00:21+07:00.
+</ADDITIONAL_METADATA>
+<USER_SETTINGS_CHANGE>
+The user changed setting `Model Selection` from None to Gemini 3.8 Flash (Medium). No need to comment on this change if the user doesn't ask about it. If reporting what model you are, please use a human readable name instead of the exact string.
+</USER_SETTINGS_CHANGE>
